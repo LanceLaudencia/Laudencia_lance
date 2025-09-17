@@ -13,14 +13,45 @@ class Studentcontroller extends Controller {
          $this->call->database();
         $this->call->model('Studentmodel');
     }
+
     public function show()
     {
         $this->call->database();
         $this->call->model('Studentmodel');
         $data['students'] = $this->Studentmodel->all();
         $this->call->view('show', $data);
-  
+
+          
+        $page = 1;
+        if(isset($_GET['page']) && ! empty($_GET['page'])) {
+            $page = $this->io->get('page');
+        }
+
+        $q = '';
+        if(isset($_GET['q']) && ! empty($_GET['q'])) {
+            $q = trim($this->io->get('q'));
+        }
+
+        $records_per_page = 10;
+
+        $all = $this->Studentmodel->page($q, $records_per_page, $page);
+        $data['all'] = $all['records'];
+        $total_rows = $all['total_rows'];
+        $this->pagination->set_options([
+            'first_link'     => '⏮ First',
+            'last_link'      => 'Last ⏭',
+            'next_link'      => 'Next →',
+            'prev_link'      => '← Prev',
+            'page_delimiter' => '&page='
+        ]);
+        $this->pagination->set_theme('bootstrap'); // or 'tailwind', or 'custom'
+        $this->pagination->initialize($total_rows, $records_per_page, $page, site_url('students').'?q='.$q);
+        $data['page'] = $this->pagination->paginate();
+        $this->call->view('students', $data);
     }
+  
+    
+
     public function create()
     {
        if ($this->io->method() == 'post') 
@@ -45,6 +76,7 @@ class Studentcontroller extends Controller {
     }
     
     }
+
     public function update($id)
     {
         $data['students'] = $this->Studentmodel->find($id);

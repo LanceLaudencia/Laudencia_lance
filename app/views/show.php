@@ -116,6 +116,21 @@
   </style>
 </head>
 <body>
+
+  <form action="<?=site_url('students');?>" method="get" class="col-sm-4 float-end d-flex">
+		<?php
+		$q = '';
+		if(isset($_GET['q'])) {
+			$q = $_GET['q'];
+		}
+		?>
+        <input class="form-control me-2" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
+        <button type="submit" class="btn btn-primary" type="button">Search</button>
+	</form>
+
+
+
+
   <h1>Welcome to Show View</h1>
   <table>
     <thead>
@@ -140,6 +155,8 @@
       <?php endforeach; ?>
     </tbody>
   </table>
+  <?php
+	echo $page;?>
   <a href="<?= site_url('user/create'); ?>" class="create-link">Create Record</a>
 </body>
 </html>
