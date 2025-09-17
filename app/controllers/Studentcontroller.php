@@ -34,9 +34,9 @@ class Studentcontroller extends Controller {
 
         $records_per_page = 10;
 
-        $all = $this->Studentmodel->page($q, $records_per_page, $page);
-        $data['all'] = $all['records'];
-        $total_rows = $all['total_rows'];
+        $show = $this->Studentmodel->page($q, $records_per_page, $page);
+        $data['show'] = $show['records'];
+        $total_rows = $show['total_rows'];
         $this->pagination->set_options([
             'first_link'     => '⏮ First',
             'last_link'      => 'Last ⏭',
