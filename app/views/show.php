@@ -155,6 +155,8 @@
       <?php endforeach; ?>
     </tbody>
   </table>
+  <?php
+	echo $page; ?>
 
   <a href="<?= site_url('user/create'); ?>" class="create-link">Create Record</a>
 </body>
