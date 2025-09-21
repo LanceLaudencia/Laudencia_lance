@@ -117,7 +117,8 @@
 </head>
 <body>
 
-  <form action="<?=site_url('students');?>" method="get" class="col-sm-4 float-end d-flex">
+  <h1>Students Info</h1>
+    <form action="<?=site_url('students');?>" method="get" class="col-sm-4 float-end d-flex search-form" class="search-form">
 		<?php
 		$q = '';
 		if(isset($_GET['q'])) {
@@ -125,39 +126,34 @@
 		}
 		?>
         <input class="form-control me-2" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
-        <button type="submit" class="btn btn-primary" type="button">Search</button>
+        <button type="submit" class="btn btn-primary" type="button">Search</button>	
 	</form>
-
-
-
-
-  <h1>Welcome to Show View</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Last Name</th>
-        <th>First Name</th>
-        <th>Email</th>
-        <th colspan="2">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($students as $student): ?>
-      <tr>
-        <td><?= html_escape($student['id']); ?></td>
-        <td><?= html_escape($student['last_name']); ?></td>
-        <td><?= html_escape($student['first_name']); ?></td>
-        <td><?= html_escape($student['email']); ?></td>
-        <td class="actions"><a href="<?= site_url('user/update/' . $student['id']); ?>">Update</a></td>
-        <td class="actions"><a href="<?= site_url('user/delete/' . $student['id']); ?>" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a></td>
-      </tr>
-      <?php endforeach; ?>
-    </tbody>
-  </table>
-  <?php
-	echo $page; ?>
-
-  <a href="<?= site_url('user/create'); ?>" class="create-link">Create Record</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Last Name</th>
+            <th>FIrst Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        <?php foreach (html_escape($students) as $student): ?>
+        <tr>
+            <td><?=$student['id']; ?></td>
+            <td><?=$student['last_name']; ?></td>
+            <td><?=$student['first_name']; ?></td>
+            <td><?=$student['email']; ?></td>
+            <td>
+                <a href="<?=site_url('/users/update/'.$student['id']);?>">Update</a>
+                <a href="<?=site_url('/users/delete/'.$student['id']);?>">Delete</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    <?php
+	echo $page;?>
+    <div class="button-container">
+        <a href="<?=site_url('users/create'); ?>" class="btn-create">+ Create New User</a>
+    </div>
+   
 </body>
 </html>

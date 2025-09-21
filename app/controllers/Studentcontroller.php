@@ -16,12 +16,8 @@ class Studentcontroller extends Controller {
 
     public function show()
     {
-        $this->call->database();
-        $this->call->model('Studentmodel');
-        $data['students'] = $this->Studentmodel->all();
-        $this->call->view('show', $data);
+     $this->call->model('Studentodel');
 
-          
         $page = 1;
         if(isset($_GET['page']) && ! empty($_GET['page'])) {
             $page = $this->io->get('page');
@@ -34,9 +30,10 @@ class Studentcontroller extends Controller {
 
         $records_per_page = 10;
 
-        $show = $this->Studentmodel->page($q, $records_per_page, $page);
-        $data['show'] = $show['records'];
-        $total_rows = $show['total_rows'];
+        $user = $this->Studentmodel->page($q, $records_per_page, $page);
+        $data['user'] = $user['records'];
+        $total_rows = $user['total_rows'];
+
         $this->pagination->set_options([
             'first_link'     => '⏮ First',
             'last_link'      => 'Last ⏭',
@@ -44,12 +41,13 @@ class Studentcontroller extends Controller {
             'prev_link'      => '← Prev',
             'page_delimiter' => '&page='
         ]);
-        $this->pagination->set_theme('bootstrap'); // or 'tailwind', or 'custom'
-        $this->pagination->initialize($total_rows, $records_per_page, $page, site_url('students').'?q='.$q);
+        $this->pagination->set_theme('bootstrap');
+        $this->pagination->initialize($total_rows, $records_per_page, $page, 'user?q='.$q);
         $data['page'] = $this->pagination->paginate();
-        $this->call->view('students', $data);
+
+        $this->call->view('user/show', $data);
     }
-  
+
     
 
     public function create()
