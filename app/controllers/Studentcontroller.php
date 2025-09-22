@@ -10,44 +10,38 @@ class Studentcontroller extends Controller {
     public function __construct()
     {
         parent::__construct();
-         $this->call->database();
-        $this->call->model('Studentmodel');
+    $this->call->database();
+    $this->call->model('Studentmodel');
+    $this->call->library('pagination');
     }
 
     public function show()
     {
-     $this->call->model('Studentodel');
+     // Safely get page, default to 1 if not present
+    $page = (int) ($this->io->get('page') ?? 1);
 
-        $page = 1;
-        if(isset($_GET['page']) && ! empty($_GET['page'])) {
-            $page = $this->io->get('page');
-        }
+    // Safely get search query
+    $q = trim($this->io->get('q') ?? '');
 
-        $q = '';
-        if(isset($_GET['q']) && ! empty($_GET['q'])) {
-            $q = trim($this->io->get('q'));
-        }
+    $records_per_page = 10;
 
-        $records_per_page = 10;
+    $result = $this->Studentmodel->page($q, $records_per_page, $page);
+    $data['students'] = $result['records'];
+    $total_rows       = $result['total_rows'];
 
-        $user = $this->Studentmodel->page($q, $records_per_page, $page);
-        $data['user'] = $user['records'];
-        $total_rows = $user['total_rows'];
+    $this->pagination->set_options([
+        'first_link'     => '⏮ First',
+        'last_link'      => 'Last ⏭',
+        'next_link'      => 'Next →',
+        'prev_link'      => '← Prev',
+        'page_delimiter' => '&page='
+    ]);
+    $this->pagination->set_theme('bootstrap');
+    $this->pagination->initialize($total_rows, $records_per_page, $page, 'user/show?q='.$q);
+    $data['page'] = $this->pagination->paginate();
 
-        $this->pagination->set_options([
-            'first_link'     => '⏮ First',
-            'last_link'      => 'Last ⏭',
-            'next_link'      => 'Next →',
-            'prev_link'      => '← Prev',
-            'page_delimiter' => '&page='
-        ]);
-        $this->pagination->set_theme('bootstrap');
-        $this->pagination->initialize($total_rows, $records_per_page, $page, 'user?q='.$q);
-        $data['page'] = $this->pagination->paginate();
-
-        $this->call->view('user/show', $data);
-    }
-
+    $this->call->view('user/show', $data);
+}
     
 
     public function create()
