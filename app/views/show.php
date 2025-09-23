@@ -183,7 +183,7 @@
 </head>
 <body>
 
-  <h1>🎓 Students Info</h1>
+  <h1> Students Info</h1>
 
   <form action="<?=site_url('user/show');?>" method="get" class="search-form">
     <?php $q = $_GET['q'] ?? ''; ?>
