@@ -131,17 +131,18 @@ Class Io {
   	 * @param  string
   	 * @return string
   	 */
-	public function get($index = NULL)
-	{
-		if($index === NULL && !empty($_GET)) {
-			$get = array();
-			foreach($_GET as $key => $value) {
-				$get[$key] = $value;
-			}
-			return $get;
-		}
-		return $_GET[$index];
-	}
+public function get($index = null)
+{
+    if (is_null($index)) {
+        $get = [];
+        foreach ($_GET as $key => $value) {
+            $get[$key] = $value;
+        }
+        return $get;
+    }
+
+    return $_GET[$index] ?? null; // ✅ safe, no warning
+}
 
 	/**
 	 * POST and GET
