@@ -21,6 +21,29 @@
       color: #fff;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
     }
+    .pagination {
+  display: flex;
+  justify-content: center; /* or space-between, space-around */
+  align-items: center;
+  gap: 8px; /* spacing between links */
+  margin-top: 20px;
+}
+
+.pagination a {
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f9f9f9;
+  color: #333;
+  transition: 0.2s;
+}
+
+.pagination a:hover {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
 
     /* Search form */
     .search-form {
@@ -187,7 +210,7 @@
 
   <form action="<?=site_url('user/show');?>" method="get" class="search-form">
     <?php $q = $_GET['q'] ?? ''; ?>
-    <input name="q" type="text" placeholder="🔍 Search students..." value="<?=html_escape($q);?>">
+    <input name="q" type="text" placeholder=" Search students..." value="<?=html_escape($q);?>">
     <button type="submit">Search</button>
   </form>
 
@@ -209,13 +232,15 @@
         <td><?=html_escape($student['first_name']); ?></td>
         <td><?=html_escape($student['email']); ?></td>
         <td class="actions">
-          <a href="<?=site_url('/user/update/'.$student['id']);?>">✏ Update</a>
-          <a href="<?=site_url('/user/delete/'.$student['id']);?>">🗑 Delete</a>
+          <a href="<?=site_url('/user/update/'.$student['id']);?>"> Update</a>
+          <a href="<?=site_url('/user/delete/'.$student['id']);?>"> Delete</a>
         </td>
       </tr>
       <?php endforeach; ?>
     </tbody>
   </table>
+
+  
 
   <div class="pagination">
     <?= $page; ?>

@@ -187,7 +187,7 @@
 
   <form action="<?=site_url('user/show');?>" method="get" class="search-form">
     <?php $q = $_GET['q'] ?? ''; ?>
-    <input name="q" type="text" placeholder="🔍 Search students..." value="<?=html_escape($q);?>">
+    <input name="q" type="text" placeholder=" Search students..." value="<?=html_escape($q);?>">
     <button type="submit">Search</button>
   </form>
 
@@ -209,8 +209,8 @@
         <td><?=html_escape($student['first_name']); ?></td>
         <td><?=html_escape($student['email']); ?></td>
         <td class="actions">
-          <a href="<?=site_url('/user/update/'.$student['id']);?>">✏ Update</a>
-          <a href="<?=site_url('/user/delete/'.$student['id']);?>">🗑 Delete</a>
+          <a href="<?=site_url('/user/update/'.$student['id']);?>"> Update</a>
+          <a href="<?=site_url('/user/delete/'.$student['id']);?>"> Delete</a>
         </td>
       </tr>
       <?php endforeach; ?>
