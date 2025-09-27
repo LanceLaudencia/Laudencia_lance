@@ -140,38 +140,28 @@ public function register()
         $this->call->view('auth/register');
     }
 
-    public function login()
+   public function index()
     {
-        $this->call->library('auth');
-
-        if ($this->io->method() == 'post') {
-            $username = $this->io->post('username');
-            $password = $this->io->post('password');
-
-            if ($this->auth->login($username, $password)) {
-                redirect('auth/dashboard');
-            } else {
-                echo 'Login failed!';
-            }
-        }
-
-        $this->call->view('auth/login');
+        $this->call->view('login');
     }
 
+    public function submit()
+    {
+        $username = $this->io->post('username');
+        $password = $this->io->post('password');
 
+        // 🔑 Hardcoded user (replace with DB check later)
+        if ($username === 'admin' && $password === '1234') {
+            $this->auth->login(1); // store session
+            redirect('studentcontroller/index');
+        } else {
+            echo "Invalid username or password!";
+        }
+    }
 
     public function logout()
     {
-        $this->call->library('auth');
         $this->auth->logout();
-        redirect('auth/login');
+        redirect('login');
     }
 }
-
-
-
-
-
-
-
-
