@@ -197,9 +197,9 @@
         color: #555;
       }
       tbody td:nth-of-type(1)::before { content: "ID"; }
-      tbody td:nth-of-type(2)::before { content: "Last Name"; }
-      tbody td:nth-of-type(3)::before { content: "First Name"; }
-      tbody td:nth-of-type(4)::before { content: "Email"; }
+      tbody td:nth-of-type(2)::before { content: "Username"; }
+      tbody td:nth-of-type(3)::before { content: "Email"; }
+      tbody td:nth-of-type(4)::before { content: "Password"; }
       tbody td:nth-of-type(5)::before { content: "Actions"; }
     }
   </style>
