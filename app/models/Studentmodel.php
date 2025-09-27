@@ -70,6 +70,7 @@ class Studentmodel extends Model {
             $query->like('id', $q)
                   ->or_like('username', $q)
                   ->or_like('email', $q)
+                  ->or_like('password', $q)
                   ->or_like('role', $q);
         }
 
