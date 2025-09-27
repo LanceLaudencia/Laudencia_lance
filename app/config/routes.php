@@ -51,7 +51,3 @@ $router->match('user/create', 'Studentcontroller::create', ['GET', 'POST']);
 $router->match('user/update/{id}', 'Studentcontroller::update', ['GET', 'POST']);
 $router->get('user/delete/{id}', 'Studentcontroller::delete');
 
-// Auth
-$router->match('/login', 'Studentcontroller::login', ['GET', 'POST']);
-$router->match('user/register', 'Studentcontroller::register', ['GET', 'POST']);
-$router->get('user/logout', 'Studentcontroller::logout');

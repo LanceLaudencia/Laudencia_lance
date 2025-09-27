@@ -13,7 +13,7 @@ class Studentcontroller extends Controller {
     $this->call->database();
     $this->call->model('Studentmodel');
     $this->call->library('pagination');
-    $this->call->library('auth');  // ✅ load Auth.php
+
    
     }
 
@@ -44,17 +44,7 @@ class Studentcontroller extends Controller {
     $this->pagination->initialize($total_rows, $records_per_page, $page, 'user/show?q='.$q);
     $data['page'] = $this->pagination->paginate();
 
-    // Auth check
-    $this->call->library('auth');
 
-    if (!$this->auth->is_logged_in()) {
-        redirect('user/login'); // fixed: redirect to your login route
-    }
-
-    if (!$this->auth->has_role('admin')) {
-        echo 'Access denied!';
-        exit;
-    }
 
     // Load only the students view
     $this->call->view('user/show', $data);
@@ -123,45 +113,4 @@ class Studentcontroller extends Controller {
     }
 
 
-public function register()
-    {
-        $this->call->library('auth');
-
-        if ($this->io->method() == 'post') {
-            $username = $this->io->post('username');
-            $password = $this->io->post('password');
-            $role = $this->io->post('role') ?? 'user';
-
-            if ($this->auth->register($username, $password, $role)) {
-                redirect('auth/login');
-            }
-        }
-
-        $this->call->view('auth/register');
-    }
-
-   public function index()
-    {
-        $this->call->view('login');
-    }
-
-    public function submit()
-    {
-        $username = $this->io->post('username');
-        $password = $this->io->post('password');
-
-        // 🔑 Hardcoded user (replace with DB check later)
-        if ($username === 'admin' && $password === '1234') {
-            $this->auth->login(1); // store session
-            redirect('studentcontroller/index');
-        } else {
-            echo "Invalid username or password!";
-        }
-    }
-
-    public function logout()
-    {
-        $this->auth->logout();
-        redirect('login');
-    }
 }
