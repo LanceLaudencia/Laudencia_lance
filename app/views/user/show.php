@@ -206,11 +206,26 @@
 </head>
 <body>
 
+
+   <h2>
+    <?= ($logged_in_user['role'] === 'admin') ? 'Admin Dashboard' : 'User Dashboard'; ?>
+      </h2>
+
+
+      <?php if(!empty($logged_in_user)): ?>
+        <div class="user-status">
+          <strong>Welcome:</strong> 
+          <span class="username"><?= html_escape($logged_in_user['username']); ?></span>
+        </div>
+      <?php else: ?>
+        <div class="user-status error">
+          Logged in user not found
+        </div>
+      <?php endif; ?>
+
+
   <h1> Students Info</h1>
 
-   <h1>Welcome, <?= session('username') ?>!</h1>
-<p>Role: <?= session('role') ?></p>
-<a href="<?= site_url('auth/logout') ?>">Logout</a>
 
   <form action="<?=site_url('user/show');?>" method="get" class="search-form">
     <?php $q = $_GET['q'] ?? ''; ?>
@@ -226,6 +241,10 @@
         <th>First Name</th>
         <th>Email</th>
         <th>Actions</th>
+         <?php if ($logged_in_user['role'] === 'admin'): ?>
+            <th>Password</th>
+            <th>Role</th>
+          <?php endif; ?>
       </tr>
     </thead>
     <tbody>
@@ -235,6 +254,12 @@
         <td><?=html_escape($student['last_name']); ?></td>
         <td><?=html_escape($student['first_name']); ?></td>
         <td><?=html_escape($student['email']); ?></td>
+        <?php if ($logged_in_user['role'] === 'admin'): ?>
+              <td>*******</td>
+              <td><?= html_escape($user['role']); ?></td>
+            <?php endif; ?>
+
+
         <td class="actions">
           <a href="<?=site_url('/user/update/'.$student['id']);?>"> Update</a>
           <a href="<?=site_url('/user/delete/'.$student['id']);?>"> Delete</a>
