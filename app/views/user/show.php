@@ -237,23 +237,25 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Last Name</th>
-        <th>First Name</th>
+        <th>UserName</th>
         <th>Email</th>
-        <th>Actions</th>
+        <th>Password</th>
          <?php if ($logged_in_user['role'] === 'admin'): ?>
             <th>Password</th>
             <th>Role</th>
+            <th>Actions</th>
           <?php endif; ?>
       </tr>
     </thead>
+
+
     <tbody>
       <?php foreach ($students as $student): ?>
       <tr>
         <td><?=html_escape($student['id']); ?></td>
-        <td><?=html_escape($student['last_name']); ?></td>
-        <td><?=html_escape($student['first_name']); ?></td>
+        <td><?=html_escape($student['username']); ?></td>
         <td><?=html_escape($student['email']); ?></td>
+        <td><?=html_escape($student['password']); ?></td>
         <?php if ($logged_in_user['role'] === 'admin'): ?>
               <td>*******</td>
               <td><?= html_escape($user['role']); ?></td>

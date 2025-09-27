@@ -68,9 +68,9 @@ class Studentmodel extends Model {
 
         if (!empty($q)) {
             $query->like('id', $q)
-                  ->or_like('last_name', $q)
-                  ->or_like('first_name', $q)
-                  ->or_like('email', $q);
+                  ->or_like('username', $q)
+                  ->or_like('email', $q)
+                  ->or_like('role', $q);
         }
 
         // Clone before pagination
