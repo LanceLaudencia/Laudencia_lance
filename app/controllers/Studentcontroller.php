@@ -13,6 +13,8 @@ class Studentcontroller extends Controller {
     $this->call->database();
     $this->call->model('Studentmodel');
     $this->call->library('pagination');
+    $this->call->library('auth');  // ✅ load Auth.php
+    $this->auth->check();
     }
 
    public function show()
