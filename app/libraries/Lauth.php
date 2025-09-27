@@ -1,40 +1,40 @@
 <?php
-class auth
+defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
+
+class Auth
 {
-    protected $_lava;
+    protected $db;
+    protected $session;
 
     public function __construct()
     {
-        $this->_lava = lava_instance();
-        $this->_lava->call->database();
-        $this->_lava->call->library('session');
+        $lava = lava_instance();
+
+        // Load required components
+        $lava->call->database();
+        $lava->call->library('session');
+
+        // Assign for easier use
+        $this->db = $lava->db;
+        $this->session = $lava->session;
     }
 
     /**
      * Register a new user
-     *
-     * @param string $username
-     * @param string $password
-     * @param string $role
-     * @return bool
      */
     public function register($username, $password, $role = 'user')
     {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         return $this->db->table('users')->insert([
-            'username' => $username,
-            'password' => $hash,
-            'role' => $role,
+            'username'   => $username,
+            'password'   => $hash,
+            'role'       => $role,
             'created_at' => date('Y-m-d H:i:s')
         ]);
     }
 
     /**
      * Login user
-     *
-     * @param string $username
-     * @param string $password
-     * @return bool
      */
     public function login($username, $password)
     {
@@ -44,9 +44,9 @@ class auth
 
         if ($user && password_verify($password, $user['password'])) {
             $this->session->set_userdata([
-                'user_id' => $user['id'],
-                'username' => $user['username'],
-                'role' => $user['role'],
+                'user_id'   => $user['id'],
+                'username'  => $user['username'],
+                'role'      => $user['role'],
                 'logged_in' => true
             ]);
             return true;
@@ -57,8 +57,6 @@ class auth
 
     /**
      * Check if user is logged in
-     *
-     * @return bool
      */
     public function is_logged_in()
     {
@@ -67,9 +65,6 @@ class auth
 
     /**
      * Check user role
-     *
-     * @param string $role
-     * @return bool
      */
     public function has_role($role)
     {
@@ -78,12 +73,11 @@ class auth
 
     /**
      * Logout user
-     *
-     * @return void
      */
     public function logout()
     {
-        $this->session->unset_userdata(['user_id','username','role','logged_in']);
+        $this->session->unset_userdata([
+            'user_id', 'username', 'role', 'logged_in'
+        ]);
     }
 }
-?>

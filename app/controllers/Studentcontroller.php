@@ -15,9 +15,9 @@ class Studentcontroller extends Controller {
     $this->call->library('pagination');
     }
 
-    public function show()
-    {
-     // Safely get page, default to 1 if not present
+   public function show()
+{
+    // Safely get page, default to 1 if not present
     $page = (int) ($this->io->get('page') ?? 1);
 
     // Safely get search query
@@ -25,10 +25,12 @@ class Studentcontroller extends Controller {
 
     $records_per_page = 10;
 
+    // Get paginated students
     $result = $this->Studentmodel->page($q, $records_per_page, $page);
     $data['students'] = $result['records'];
     $total_rows       = $result['total_rows'];
 
+    // Pagination setup
     $this->pagination->set_options([
         'first_link'     => '⏮ First',
         'last_link'      => 'Last ⏭',
@@ -40,19 +42,19 @@ class Studentcontroller extends Controller {
     $this->pagination->initialize($total_rows, $records_per_page, $page, 'user/show?q='.$q);
     $data['page'] = $this->pagination->paginate();
 
+    // Auth check
     $this->call->library('auth');
 
-        if (!$this->auth->is_logged_in()) {
-            redirect('auth/login');
-        }
+    if (!$this->auth->is_logged_in()) {
+        redirect('user/login'); // fixed: redirect to your login route
+    }
 
-        if (!$this->auth->has_role('admin')) {
-            echo 'Access denied!';
-            exit;
-        }
+    if (!$this->auth->has_role('admin')) {
+        echo 'Access denied!';
+        exit;
+    }
 
-        $this->call->view('auth/show');
-
+    // Load only the students view
     $this->call->view('user/show', $data);
 }
     
