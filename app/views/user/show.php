@@ -208,6 +208,10 @@
 
   <h1> Students Info</h1>
 
+   <h1>Welcome, <?= session('username') ?>!</h1>
+<p>Role: <?= session('role') ?></p>
+<a href="<?= site_url('auth/logout') ?>">Logout</a>
+
   <form action="<?=site_url('user/show');?>" method="get" class="search-form">
     <?php $q = $_GET['q'] ?? ''; ?>
     <input name="q" type="text" placeholder=" Search students..." value="<?=html_escape($q);?>">
