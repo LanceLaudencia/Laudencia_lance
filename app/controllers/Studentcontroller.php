@@ -40,6 +40,19 @@ class Studentcontroller extends Controller {
     $this->pagination->initialize($total_rows, $records_per_page, $page, 'user/show?q='.$q);
     $data['page'] = $this->pagination->paginate();
 
+    $this->call->library('auth');
+
+        if (!$this->auth->is_logged_in()) {
+            redirect('auth/login');
+        }
+
+        if (!$this->auth->has_role('admin')) {
+            echo 'Access denied!';
+            exit;
+        }
+
+        $this->call->view('auth/show');
+
     $this->call->view('user/show', $data);
 }
     
@@ -141,21 +154,7 @@ public function register()
         $this->call->view('auth/login');
     }
 
-    public function dashboard()
-    {
-        $this->call->library('auth');
 
-        if (!$this->auth->is_logged_in()) {
-            redirect('auth/login');
-        }
-
-        if (!$this->auth->has_role('admin')) {
-            echo 'Access denied!';
-            exit;
-        }
-
-        $this->call->view('auth/dashboard');
-    }
 
     public function logout()
     {
