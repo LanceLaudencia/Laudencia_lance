@@ -25,7 +25,7 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      background: linear-gradient(135deg, #6a11cb, #2575fc); /* same as Register */
     }
 
     .login-container {
@@ -33,7 +33,7 @@
       padding: 40px 35px;
       border-radius: 15px;
       width: 100%;
-      max-width: 380px;
+      max-width: 400px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
       text-align: center;
     }
@@ -68,8 +68,8 @@
     }
 
     .login-container form input:focus {
-      border-color: #ff4b2b;
-      box-shadow: 0 0 5px rgba(255, 75, 43, 0.4);
+      border-color: #2575fc;
+      box-shadow: 0 0 5px rgba(37, 117, 252, 0.4);
     }
 
     .inputBox {
@@ -91,7 +91,7 @@
       padding: 14px;
       border: none;
       border-radius: 8px;
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      background: linear-gradient(135deg, #6a11cb, #2575fc); /* same as Register */
       color: #fff;
       font-size: 16px;
       font-weight: 600;
@@ -114,7 +114,7 @@
     }
 
     .group a {
-      color: #ff4b2b;
+      color: #2575fc;
       text-decoration: none;
       font-weight: 500;
     }
