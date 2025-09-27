@@ -5,7 +5,7 @@
 </head>
 <body>
     <h2>Login</h2>
-    <form method="post" action="<?= site_url('Studentcontroller/submit'); ?>">
+    <form method="post" action="<?= site_url('user/login'); ?>">
         <label>Username:</label>
         <input type="text" name="username" required><br>
 
