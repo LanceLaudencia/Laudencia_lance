@@ -80,15 +80,15 @@
 <body>
   <div class="container">
     <h1>Welcome to Update View</h1>
-    <form action="<?= site_url('user/update/' . $students['id']); ?>" method="post">
-      <label for="last_name">Last Name</label>
-      <input type="text" name="last_name" id="last_name" value="<?= html_escape($students['last_name']); ?>" required />
+    <form action="<?= site_url('user/update/' . $users['id']); ?>" method="post">
+      <label for="username">UserName</label>
+      <input type="text" name="username" id="username" value="<?= html_escape($users['username']); ?>" required />
 
-      <label for="first_name">First Name</label>
-      <input type="text" name="first_name" id="first_name" value="<?= html_escape($students['first_name']); ?>" required />
+      <label for="password">Password</label>
+      <input type="text" name="password" id="password" value="<?= html_escape($users['password']); ?>" required />
 
       <label for="email">Email</label>
-      <input type="email" name="email" id="email" value="<?= html_escape($students['email']); ?>" required />
+      <input type="email" name="email" id="email" value="<?= html_escape($users['email']); ?>" required />
 
       <button type="submit">Submit</button>
     </form>

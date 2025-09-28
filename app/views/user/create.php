@@ -81,11 +81,11 @@
   <div class="container">
     <h1>Welcome to Update View</h1>
     <form action="<?= site_url('user/create'); ?>" method="post">
-      <label for="last_name">Last Name</label>
-      <input type="text" name="last_name" id="last_name"  required />
+      <label for="username">UserName</label>
+      <input type="text" name="username" id="username"  required />
 
-      <label for="first_name">First Name</label>
-      <input type="text" name="first_name" id="first_name"  required />
+      <label for="password">Password</label>
+      <input type="text" name="password" id="password"  required />
 
       <label for="email">Email</label>
       <input type="email" name="email" id="email" required />

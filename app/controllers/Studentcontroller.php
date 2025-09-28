@@ -45,7 +45,7 @@ class Studentcontroller extends Controller {
 
     // Get paginated students
     $result = $this->Studentmodel->page($q, $records_per_page, $page);
-    $data['students'] = $result['records'];
+    $data['users'] = $result['records'];
     $total_rows       = $result['total_rows'];
 
     // Pagination setup
@@ -71,12 +71,12 @@ class Studentcontroller extends Controller {
     {
        if ($this->io->method() == 'post') 
         {
-        $last_name = $this->io->post('last_name');
-        $first_name = $this->io->post('first_name');
+        $username = $this->io->post('username');
+        $password = $this->io->post('password');
         $email = $this->io->post('email');
         $data = array(
-            'last_name' => $last_name,
-            'first_name' => $first_name,
+            'username' => $username,
+            'password' => $password,
             'email' => $email,
         );
         if($this->Studentmodel->insert($data))
@@ -94,18 +94,18 @@ class Studentcontroller extends Controller {
 
     public function update($id)
     {
-        $data['students'] = $this->Studentmodel->find($id);
+        $data['users'] = $this->Studentmodel->find($id);
         if ($this->io->method() == 'post') 
         {
-        $last_name = $this->io->post('last_name');
-        $first_name = $this->io->post('first_name');
+       $username = $this->io->post('username');
+        $password = $this->io->post('password');
         $email = $this->io->post('email');
         $data = array(
-            'last_name' => $last_name,
-            'first_name' => $first_name,
+            'username' => $username,
+            'password' => $password,
             'email' => $email,
         );
-        if($this->Studentmodel->update($id, $data))
+        if($this->Studentmodel->insert($data))
         {
             redirect('user/show');
         }else{

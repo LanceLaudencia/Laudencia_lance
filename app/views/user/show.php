@@ -250,12 +250,12 @@
 
 
     <tbody>
-      <?php foreach ($students as $student): ?>
+      <?php foreach ($users as $user): ?>
       <tr>
-        <td><?=html_escape($student['id']); ?></td>
-        <td><?=html_escape($student['username']); ?></td>
-        <td><?=html_escape($student['email']); ?></td>
-        <td><?=html_escape($student['password']); ?></td>
+        <td><?=html_escape($user['id']); ?></td>
+        <td><?=html_escape($user['username']); ?></td>
+        <td><?=html_escape($user['email']); ?></td>
+        <td><?=html_escape($user['password']); ?></td>
         <?php if ($logged_in_user['role'] === 'admin'): ?>
               <td>*******</td>
               <td><?= html_escape($user['role']); ?></td>
@@ -263,8 +263,8 @@
 
 
         <td class="actions">
-          <a href="<?=site_url('/user/update/'.$student['id']);?>"> Update</a>
-          <a href="<?=site_url('/user/delete/'.$student['id']);?>"> Delete</a>
+          <a href="<?=site_url('/user/update/'.$user['id']);?>"> Update</a>
+          <a href="<?=site_url('/user/delete/'.$user['id']);?>"> Delete</a>
         </td>
       </tr>
       <?php endforeach; ?>
