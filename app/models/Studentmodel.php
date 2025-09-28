@@ -7,7 +7,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
  * Automatically generated via CLI.
  */
 class Studentmodel extends Model {
-    protected $table = 'students';
+    protected $table = 'users';
     protected $primary_key = 'id';
 
     public function __construct()
@@ -23,12 +23,13 @@ class Studentmodel extends Model {
                         ->get();
     }
 
-    public function get_user_by_username($username)
-    {
-        return $this->db->table($this->table)
-                        ->where('username', $username)
-                        ->get();
-    }
+ public function get_user_by_username($username)
+{
+    return $this->db->table($this->table)
+                    ->where('username', $username)
+                    ->get_first();
+}
+
 
     public function update_password($user_id, $new_password) {
     return $this->db->table($this->table)
@@ -62,9 +63,9 @@ class Studentmodel extends Model {
 
      public function page($q, $records_per_page = null, $page = null) {
     if (is_null($page)) {
-        return $this->db->table('students')->get_all();
+        return $this->db->table('users')->get_all();
     } else {
-        $query = $this->db->table('students');
+        $query = $this->db->table('users');
 
         if (!empty($q)) {
             $query->like('id', $q)

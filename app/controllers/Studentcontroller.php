@@ -14,6 +14,10 @@ class Studentcontroller extends Controller {
     $this->call->model('Studentmodel');
     $this->call->library('pagination');
 
+    if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
    
     }
 
@@ -105,12 +109,11 @@ class Studentcontroller extends Controller {
             'password' => $password,
             'email' => $email,
         );
-        if($this->Studentmodel->insert($data))
-        {
-            redirect('user/show');
-        }else{
-            echo 'Something went wrong';
-        }
+   if ($this->Studentmodel->update($id, $data)) {
+    redirect('user/show');
+} else {
+    echo 'Something went wrong';
+}
     
     }else {
 
@@ -214,7 +217,7 @@ class Studentcontroller extends Controller {
 
         $records_per_page = 10;
 
-        $user = $this->UsersModel->page($q, $records_per_page, $page);
+$user = $this->Studentmodel->page($q, $records_per_page, $page);
         $data['user'] = $user['records'];
         $total_rows = $user['total_rows'];
 

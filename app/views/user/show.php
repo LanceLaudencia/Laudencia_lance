@@ -236,15 +236,14 @@
   <table>
     <thead>
       <tr>
-        <th>ID</th>
-        <th>UserName</th>
-        <th>Email</th>
-        <th>Password</th>
-         <?php if ($logged_in_user['role'] === 'admin'): ?>
-            <th>Password</th>
-            <th>Role</th>
-            <th>Actions</th>
-          <?php endif; ?>
+       <th>ID</th>
+<th>Username</th>
+<th>Email</th>
+<?php if ($logged_in_user['role'] === 'admin'): ?>
+    <th>Password</th>
+    <th>Role</th>
+    <th>Actions</th>
+<?php endif; ?>
       </tr>
     </thead>
 
