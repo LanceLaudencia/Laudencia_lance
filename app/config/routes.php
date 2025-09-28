@@ -43,25 +43,18 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 |
 */
 
-// Registration is the default page
-$router->match('/', 'Studentcontroller::register', ['GET','POST']);
-
-// Auth routes
-$router->match('auth/register', 'Studentcontroller::register', ['GET','POST']);
-$router->match('auth/login', 'Studentcontroller::login', ['GET','POST']);
-$router->get('auth/logout', 'Studentcontroller::logout');
-
-// Homepage (after login)
-
-$router->get('user/dashboard', 'Studentcontroller::dashboard');
-
-
-// Students
 $router->get('user/show', 'Studentcontroller::show');
+$router->get('user/create', 'Studentcontroller::create');
+$router->post('user/create', 'Studentcontroller::create');
 
+$router->get('user/update/{id}', 'Studentcontroller::update');
+$router->post('user/update/{id}', 'Studentcontroller::update');
 
-//crud
-$router->match('user/create', 'Studentcontroller::create', ['GET', 'POST']);
-$router->match('user/update/{id}', 'Studentcontroller::update', ['GET', 'POST']);
 $router->get('user/delete/{id}', 'Studentcontroller::delete');
 
+// Auth routes
+$router->get('auth/login', 'Studentcontroller::login');
+$router->post('auth/login', 'Studentcontroller::login');
+$router->get('auth/register', 'Studentcontroller::register');
+$router->post('auth/register', 'Studentcontroller::register');
+$router->get('auth/logout', 'Studentcontroller::logout');
