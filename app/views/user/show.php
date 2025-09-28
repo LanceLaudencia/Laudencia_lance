@@ -206,8 +206,7 @@
 </head>
 <body>
 
-
-   <h2>
+      <h2>
     <?= ($logged_in_user['role'] === 'admin') ? 'Admin Dashboard' : 'User Dashboard'; ?>
       </h2>
 
@@ -224,51 +223,44 @@
       <?php endif; ?>
 
 
-  <h1> Students Info</h1>
-
-
-  <form action="<?=site_url('user/show');?>" method="get" class="search-form">
-    <?php $q = $_GET['q'] ?? ''; ?>
-    <input name="q" type="text" placeholder=" Search students..." value="<?=html_escape($q);?>">
-    <button type="submit">Search</button>
-  </form>
-
-  <table>
-    <thead>
-      <tr>
-       <th>ID</th>
-<th>Username</th>
-<th>Email</th>
-<?php if ($logged_in_user['role'] === 'admin'): ?>
-    <th>Password</th>
-    <th>Role</th>
-    <th>Actions</th>
-<?php endif; ?>
-      </tr>
-    </thead>
-
-
-    <tbody>
-      <?php foreach ($users as $user): ?>
-      <tr>
-        <td><?=html_escape($user['id']); ?></td>
-        <td><?=html_escape($user['username']); ?></td>
-        <td><?=html_escape($user['email']); ?></td>
-        <td><?=html_escape($user['password']); ?></td>
-        <?php if ($logged_in_user['role'] === 'admin'): ?>
+      <div class="top-bar">
+        <a href="<?=site_url('auth/logout'); ?>"><button class="logout-btn">Logout</button></a>
+        <form action="<?=site_url('users');?>" method="get" class="search-form">
+          <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
+          <input name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
+          <button type="submit">Search</button>  
+        </form>
+      </div>
+      <div class="table-responsive">
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <?php if ($logged_in_user['role'] === 'admin'): ?>
+            <th>Password</th>
+            <th>Role</th>
+          <?php endif; ?>
+          <th>Action</th>
+        </tr>
+        <?php foreach ($users as $user): ?>
+        <tr>
+          <td><?=html_escape($user['id']); ?></td>
+          <td><?=html_escape($user['username']); ?></td>
+          <td><?=html_escape($user['email']); ?></td>
+            <?php if ($logged_in_user['role'] === 'admin'): ?>
               <td>*******</td>
               <td><?= html_escape($user['role']); ?></td>
             <?php endif; ?>
+          <td>
+            <a href="<?=site_url('/user/update/'.$user['id']);?>">Update</a>
+            <a href="<?=site_url('/user/delete/'.$user['id']);?>">Delete</a>
+          </td>
+        </tr>
+        <?php endforeach; ?>
 
-
-        <td class="actions">
-          <a href="<?=site_url('/user/update/'.$user['id']);?>"> Update</a>
-          <a href="<?=site_url('/user/delete/'.$user['id']);?>"> Delete</a>
-        </td>
-      </tr>
-      <?php endforeach; ?>
-    </tbody>
-  </table>
+      </table>
+      </div>
 
   
 
