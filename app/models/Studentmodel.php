@@ -28,7 +28,7 @@ class Studentmodel extends Model {
     return $this->db->table($this->table)
                     ->where('username', $username)
                     ->get()
-                    ->getRowArray();
+                    
 }
 
 
