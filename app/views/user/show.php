@@ -5,6 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Students Info</title>
   <style>
+/* Pagination */
+.pagination {
+  display: flex;              /* align items in a row */
+  justify-content: center;    /* center horizontally */
+  align-items: center;
+  gap: 0.5rem;                /* spacing between items */
+  margin-top: 1.5rem;
+  flex-wrap: wrap;            /* prevent overflow on small screens */
+}
+
+.pagination a,
+.pagination li {
+  list-style: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0.6rem 1rem;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  color: #2575fc;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.pagination a:hover,
+.pagination li a:hover {
+  background: #2575fc;
+  color: #fff;
+}
+
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -259,7 +292,7 @@
   <!-- Search -->
   <form action="<?=site_url('/user/show');?>" method="get" class="search-form">
     <?php $q = $_GET['q'] ?? ''; ?>
-    <input name="q" type="text" placeholder=" 🔍 Search students..." value="<?=html_escape($q);?>">
+    <input name="q" type="text" placeholder="  Search students..." value="<?=html_escape($q);?>">
     <button type="submit">Search</button>
   </form>
 
