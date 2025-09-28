@@ -52,7 +52,7 @@ $router->match('auth/login', 'Studentcontroller::login', ['GET','POST']);
 $router->get('auth/logout', 'Studentcontroller::logout');
 
 // Homepage (after login)
-$router->get('user', 'Studentcontroller::index');
+$router->get('user', 'Studentcontroller::show');
 $router->get('user/dashboard', 'Studentcontroller::dashboard');
 
 
