@@ -117,7 +117,7 @@ class Studentcontroller extends Controller {
     
     }else {
 
-        $this->call->view('update' , $data);
+        $this->call->view('/user/update' , $data);
     }
 }
 
