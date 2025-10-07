@@ -110,7 +110,7 @@ class Studentcontroller extends Controller {
             'email' => $email,
         );
    if ($this->Studentmodel->update($id, $data)) {
-    redirect('user/show');
+    redirect('/user/show');
 } else {
     echo 'Something went wrong';
 }

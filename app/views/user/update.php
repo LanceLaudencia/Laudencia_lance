@@ -80,7 +80,7 @@
 <body>
   <div class="container">
     <h1>Welcome to Update View</h1>
-    <form action="<?= site_url('user/update/' . $users['id']); ?>" method="post">
+    <form action="<?= site_url('/user/update/' . $users['id']); ?>" method="post">
       <label for="username">UserName</label>
       <input type="text" name="username" id="username" value="<?= html_escape($users['username']); ?>" required />
 
