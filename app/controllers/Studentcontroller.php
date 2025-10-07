@@ -96,30 +96,37 @@ class Studentcontroller extends Controller {
     
     }
 
-    public function update($id)
+  public function update($id)
+{
+    // find user first (to show in form)
+    $data['users'] = $this->Studentmodel->find($id);
+
+    if ($this->io->method() == 'post') 
     {
-        $data['users'] = $this->Studentmodel->find($id);
-        if ($this->io->method() == 'post') 
-        {
-       $username = $this->io->post('username');
+        $username = $this->io->post('username');
         $password = $this->io->post('password');
-        $email = $this->io->post('email');
-        $data = array(
+        $email    = $this->io->post('email');
+
+        // use another variable (not $data) for updating
+        $updateData = [
             'username' => $username,
             'password' => $password,
-            'email' => $email,
-        );
-   if ($this->Studentmodel->update($id, $data)) {
-    redirect('/user/show');
-} else {
-    echo 'Something went wrong';
-}
-    
-    }else {
+            'email'    => $email,
+        ];
 
-        $this->call->view('update' , $data);
+        if ($this->Studentmodel->update($id, $updateData)) {
+            redirect('/user/show');
+        } else {
+            echo 'Something went wrong';
+        }
+    } 
+    else 
+    {
+        // show update form
+        $this->call->view('update', $data);
     }
 }
+
 
     public function delete($id)
     {
